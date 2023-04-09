@@ -44,7 +44,7 @@ const CapitalQuiz = () => {
     }
   }, [currentChoices]);
 
-  if (isLoading && currentChoices.length < 4) {
+  if (isLoading && currentAns !== {}) {
     return <div>Loading...</div>;
   }
 
@@ -86,7 +86,7 @@ const CapitalQuiz = () => {
           {currentChoices.map((country, index) => (
             <li
               key={country.name}
-              className={`hover:bg-orange-400 hover:text-white  p-2 font-medium border rounded cursor-pointer ${
+              className={`hover:bg-orange-400 active:bg-orange-400 hover:text-white  p-2 font-medium border rounded cursor-pointer ${
                 isAnswered && country.name === currentAns.name
                   ? "bg-emerald-400 bg-opacity-50 border border-emerald-600"
                   : ""
