@@ -11,6 +11,15 @@ const FlagQuiz = () => {
   const [currentAns, setCurrentAns] = useState({});
   const [wrongChoiceIndex, setWrongChoiceIndex] = useState(null);
   const [message, setMessage] = useState({ text: "", cls: "" });
+
+  useEffect(() => {
+    if (currentChoices.length === 4) {
+      const randomNo = Math.floor(Math.random() * 4);
+      const tempCountry = currentChoices.find((_, index) => index === randomNo);
+      setCurrentAns(tempCountry);
+    }
+  }, [currentChoices]);
+
   useEffect(() => {
     if (isSuccess) {
       const tempArr = [];
@@ -32,16 +41,10 @@ const FlagQuiz = () => {
     }
   }, [id, isSuccess]);
 
-  useEffect(() => {
-    if (currentChoices.length === 4) {
-      const randomNo = Math.floor(Math.random() * 4);
-      const tempCountry = currentChoices.find((_, index) => index === randomNo);
-      setCurrentAns(tempCountry);
-    }
-  }, [currentChoices]);
+  console.log(currentAns.name);
 
-  if (isLoading && currentChoices.length < 4) {
-    return <div>Loading...</div>;
+  if (isLoading || !currentAns.flag) {
+    return <div className="text-3xl text-white">Loading...</div>;
   }
 
   const handleCheckAnswer = (answer, index) => {

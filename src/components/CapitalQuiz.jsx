@@ -15,6 +15,15 @@ const CapitalQuiz = () => {
   const [currentAns, setCurrentAns] = useState({});
   const [wrongChoiceIndex, setWrongChoiceIndex] = useState(null);
   const [message, setMessage] = useState({ text: "", cls: "" });
+
+  useEffect(() => {
+    if (currentChoices.length === 4) {
+      const randomNo = Math.floor(Math.random() * 4);
+      const tempCountry = currentChoices.find((_, index) => index === randomNo);
+      setCurrentAns(tempCountry);
+    }
+  }, [currentChoices]);
+
   useEffect(() => {
     if (isSuccess) {
       const tempArr = [];
@@ -36,16 +45,8 @@ const CapitalQuiz = () => {
     }
   }, [id, isSuccess]);
 
-  useEffect(() => {
-    if (currentChoices.length === 4) {
-      const randomNo = Math.floor(Math.random() * 4);
-      const tempCountry = currentChoices.find((_, index) => index === randomNo);
-      setCurrentAns(tempCountry);
-    }
-  }, [currentChoices]);
-
-  if (isLoading && currentAns !== {}) {
-    return <div>Loading...</div>;
+  if (isLoading || !currentAns.capital) {
+    return <div className="text-3xl text-white">Loading...</div>;
   }
 
   const handleCheckAnswer = (answer, index) => {
@@ -65,6 +66,8 @@ const CapitalQuiz = () => {
     setWrongChoiceIndex(null);
     setIsAnswer(false);
   };
+
+  console.log(currentAns.name);
 
   return (
     <div>
