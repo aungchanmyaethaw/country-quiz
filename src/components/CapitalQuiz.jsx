@@ -67,8 +67,6 @@ const CapitalQuiz = () => {
     setIsAnswer(false);
   };
 
-  console.log(currentAns.name);
-
   return (
     <div>
       <h2 className="mb-2 text-xl font-bold text-white">Country Quiz</h2>

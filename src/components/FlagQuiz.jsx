@@ -41,8 +41,6 @@ const FlagQuiz = () => {
     }
   }, [id, isSuccess]);
 
-  console.log(currentAns.name);
-
   if (isLoading || !currentAns.flag) {
     return <div className="text-3xl text-white">Loading...</div>;
   }
